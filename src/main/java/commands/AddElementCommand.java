@@ -14,12 +14,14 @@ public class AddElementCommand extends Command {
         super("add {element}", "add new element to collection");
         this.collectionManager = collectionManager;
     }
+    
+    //InputStream Setter() {}
 
 
     @Override
     public void execute(String args[]){
         try{
-        HumanBeing humanBeing = HumanBeing.input(collectionManager);
+        HumanBeing humanBeing = HumanBeing.input(collectionManager); // 2 argument pass inputStream
         collectionManager.addElement(humanBeing);
         }
         catch (Exception e){
