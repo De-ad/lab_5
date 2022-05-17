@@ -44,14 +44,14 @@ public class CollectionManager {
             System.out.println("Collection was parsed from file");
         }
         catch (FileNotFoundException e) {
-            System.out.println("Not enough rights");
+            System.out.println("File was not found");
         }
         catch (Exception e){
             System.out.println("Wrong data in file");
             System.exit(1);
         }
     }
-    
+
     public void writeCSV(String fileName){
         try {
             Writer writer = new FileWriter(fileName);

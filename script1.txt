@@ -1,2 +1,12 @@
 add
 1
+10
+101
+True
+False
+-12
+11
+AXE
+CALM
+True
+show

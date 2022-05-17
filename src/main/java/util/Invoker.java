@@ -37,7 +37,8 @@ public class Invoker {
 
     public static Invoker getInstance(String fileName, CollectionManager collectionManager){
         if (invoker == null) {
-            return new Invoker(fileName, collectionManager);
+            invoker = new Invoker(fileName, collectionManager);
+            return invoker;
         }
         return invoker;
     }

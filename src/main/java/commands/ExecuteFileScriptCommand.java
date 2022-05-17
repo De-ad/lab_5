@@ -26,17 +26,26 @@ public class ExecuteFileScriptCommand extends Command {
     @Override
     public void execute(String[] args) {
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(args[0])));
+//            BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(args[0])));
             String line;
-            Invoker invoker = Invoker.getInstance(fileName, new CollectionManager());
+            Invoker invoker = Invoker.getInstance(fileName, collectionManager);
 
             if (executeFiles.containsKey(args[0])) {
                 System.out.println("Recursion of files execution");
                 return;
             }
+            File file = new File(args[0]);
+            if (!file.exists()) {
+                System.out.println("File with such name does not exist");
+                return;
+            }
+            if (!file.canRead()) {
+                System.out.println("File has no rights");
+                return;
+            }
             executeFiles.put(args[0], true);
             IO.changeMod(args[0]);
-            while ((line = reader.readLine()) != null) {
+            while ((line = IO.getInput()) != null) {
                 String[] words = line.trim().split("\\s+");
                 String command = words[0];
                 String[] argv = Arrays.copyOfRange(words, 1, words.length);
@@ -47,13 +56,6 @@ public class ExecuteFileScriptCommand extends Command {
         catch (IndexOutOfBoundsException e){
             System.out.println("no argument");
 
-        }
-        catch (FileNotFoundException e){
-            System.out.println("file not found");
-
-        }
-        catch (IOException e){
-            System.out.println("not enough access rights");
         }
         executeFiles.clear();
     }
