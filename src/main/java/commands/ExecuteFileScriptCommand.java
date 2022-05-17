@@ -7,7 +7,7 @@ import util.Invoker;
 import java.io.*;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Scanner;
+
 
 /**
  *  Command 'Execute File Script'. Reads and executes script from the written file.
@@ -32,7 +32,7 @@ public class ExecuteFileScriptCommand extends Command {
 
             if (executeFiles.containsKey(args[0])) {
                 System.out.println("Recursion of files execution");
-                return;
+                System.exit(1);
             }
             File file = new File(args[0]);
             if (!file.exists()) {
@@ -57,6 +57,5 @@ public class ExecuteFileScriptCommand extends Command {
             System.out.println("no argument");
 
         }
-        executeFiles.clear();
     }
 }

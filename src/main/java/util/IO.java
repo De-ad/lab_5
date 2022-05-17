@@ -17,14 +17,19 @@ public class IO {
     public static String getInput() {
         if (mode == inputMode.CONSOLE) {
 //            Scanner scanner = new Scanner(System.in);
-            return consoleScanner.nextLine();
-//            scanner.close();
-//            System.out.println("program terminated");
+            while(consoleScanner.hasNext()){
+                return consoleScanner.nextLine();
+            }
+
+            consoleScanner.close();
+            System.out.println("program terminated");
+            System.exit(1);
+
 //            String args = "123";
 //            String[] args1 = new String[1];
 //            Invoker invoker = Invoker.getInstance(args, new CollectionManager());
 //            invoker.execute("exit", args1);
-//            return "";
+            return "";
         }
         else{
             try {

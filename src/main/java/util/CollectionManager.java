@@ -6,10 +6,10 @@ import com.opencsv.bean.StatefulBeanToCsvBuilder;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 import data.HumanBeing;
+import data.HumanBeingComp;
 import data.WeaponType;
 import java.io.*;
 import java.util.Collections;
-import java.util.Comparator;
 import java.time.ZonedDateTime;
 import java.util.Vector;
 import java.util.List;
@@ -24,6 +24,7 @@ public class CollectionManager {
     ZonedDateTime initTime = ZonedDateTime.now();
     static Vector<HumanBeing> humanBeings;
     private static long CounterID = 1;
+    HumanBeingComp comp = new HumanBeingComp();
 
     public CollectionManager(){
         CollectionManager.humanBeings = new Vector<>();
@@ -76,7 +77,8 @@ public class CollectionManager {
 
     public boolean addIfMax(HumanBeing newHumanBeing){
         for (HumanBeing humanBeing:humanBeings){
-            if(humanBeing.getName().compareTo(newHumanBeing.getName()) > 0);
+            if(humanBeing.getName().compareTo(newHumanBeing.getName()) < 0);
+            System.out.println(humanBeing.getName().compareTo(newHumanBeing.getName()));
             return true;
         }
         return false;
@@ -160,10 +162,11 @@ public class CollectionManager {
     }
 
     public void order(){
-        humanBeings.sort((Comparator<HumanBeing>) (o1, o2) -> o1.getName().compareTo(o2.getName()));
+        humanBeings.sort(comp);
     }
 
     public void reorder(){
+        humanBeings.sort(comp);
         Collections.reverse(humanBeings);
     }
 
